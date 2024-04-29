@@ -17,7 +17,7 @@ function get_items_by_category($categoryID)
     
     $statement = $db->prepare($query);
     if ($categoryID) {
-        $statement.bindValue(':categoryID', $categoryID);
+        $statement->bindValue(':categoryID', $categoryID);
     }
     $statement->execute();
     $items = $statement->fetchAll();
@@ -30,20 +30,33 @@ function get_items() {
     global $db;
     $query = 'SELECT * FROM todoitems';
     $statement = $db.prepare($query);
-    $statement.execute();
+    $statement->execute();
     $items = $statement->fetchAll();
-    $statement.closeCursor();
+    $statement->closeCursor();
     return $items;
 }
 
 // Function to delete a todo item
-function delete_item($assignment_id)
+function delete_item($itemNum)
 {
     global $db;
     $query = 'DELETE FROM todoitems WHERE ItemNum = :itemNum';
     $statement = $db->prepare($query);
-    $statement.bindValue(':itemNum', itemNum);
+    $statement->bindValue(':itemNum', itemNum);
     $statement->execute();
     $statement->closeCursor();
 }
+
+// Function to add a new todo item
+function add_item($title, $description, $categoryID)
+{
+    global $db;
+    $query = 'INSERT INTO todoitems (Title, Description, categoryID) VALUES (:title, :description, :categoryID)';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':description', description);
+    $statement->bindValue(':categoryID', categoryID);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 
