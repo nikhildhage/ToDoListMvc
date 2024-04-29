@@ -12,6 +12,6 @@
 <body>
     <main>
         <header>
-            <h1>Assignment Tracker</h1>
+            <h1>ToDoListMVC</h1>
         </header>
     </main>

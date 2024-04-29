@@ -23,3 +23,13 @@ function get_items_by_category($categoryID)
     return $items;
 }
 
+// Function to retrieve all todo items
+function get_items() {
+    global $db;
+    $query = 'SELECT * FROM todoitems';
+    $statement = $db.prepare($query);
+    $statement.execute();
+    $items = $statement->fetchAll();
+    $statement.closeCursor();
+    return $items;
+}
