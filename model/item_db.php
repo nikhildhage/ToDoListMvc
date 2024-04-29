@@ -1,6 +1,17 @@
 <?php
 
-// Function to retrieve items by category
+// Function to retrieve all items
+function get_items() {
+    global $db;
+    $query = 'SELECT * FROM todoitems';
+    $statement = $db.prepare($query);
+    $statement->execute();
+    $items = $statement->fetchAll();
+    $statement->closeCursor();
+    return $items;
+}
+
+// Function to retrieve all items by category
 function get_items_by_category($categoryID)
 {
     global $db;
@@ -19,17 +30,6 @@ function get_items_by_category($categoryID)
     if ($categoryID) {
         $statement->bindValue(':categoryID', $categoryID);
     }
-    $statement->execute();
-    $items = $statement->fetchAll();
-    $statement->closeCursor();
-    return $items;
-}
-
-// Function to retrieve all items
-function get_items() {
-    global $db;
-    $query = 'SELECT * FROM todoitems';
-    $statement = $db.prepare($query);
     $statement->execute();
     $items = $statement->fetchAll();
     $statement->closeCursor();

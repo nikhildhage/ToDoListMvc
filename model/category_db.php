@@ -1,4 +1,6 @@
 <?php
+
+// Function to get the categories
 function get_category()
 {
     global $db;
@@ -10,7 +12,7 @@ function get_category()
     return $categories;
 }
 
-// Function to get the category name by categoryID
+// Function to get all the category names by categoryID
 function get_category_name($categoryID)
 {
     if (!$categoryID) {
