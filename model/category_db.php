@@ -1,5 +1,5 @@
 <?php
-function get_categories()
+function get_category()
 {
     global $db;
     $query = 'SELECT * FROM categories';
@@ -8,4 +8,21 @@ function get_categories()
     $categories = $statement->fetchAll();
     $statement->closeCursor();
     return $categories;
+}
+
+// Function to get the category name by categoryID
+function get_category_name($categoryID)
+{
+    if (!$categoryID) {
+        return "All Categories";
+    }
+    global $db;
+    $query = 'SELECT * FROM categories WHERE categoryID = :categoryID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':categoryID', categoryID);
+    $statement->execute();
+    $category = $statement->fetch();
+    $statement->closeCursor();
+    $course_name = $course['categoryName'];
+    return $categoryName;
 }
