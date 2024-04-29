@@ -1,4 +1,6 @@
 <?php
+
+// Function to retrieve items by category
 function get_items_by_category($categoryID)
 {
     global $db;
@@ -23,7 +25,7 @@ function get_items_by_category($categoryID)
     return $items;
 }
 
-// Function to retrieve all todo items
+// Function to retrieve all items
 function get_items() {
     global $db;
     $query = 'SELECT * FROM todoitems';
@@ -33,3 +35,15 @@ function get_items() {
     $statement.closeCursor();
     return $items;
 }
+
+// Function to delete a todo item
+function delete_item($assignment_id)
+{
+    global $db;
+    $query = 'DELETE FROM todoitems WHERE ItemNum = :itemNum';
+    $statement = $db->prepare($query);
+    $statement.bindValue(':itemNum', itemNum);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
