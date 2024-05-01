@@ -1,5 +1,7 @@
 <?php
 
+require_once('database.php');
+
 // Function to retrieve all items
 function get_items() {
     global $db;
@@ -42,7 +44,7 @@ function delete_item($itemNum)
     global $db;
     $query = 'DELETE FROM todoitems WHERE ItemNum = :itemNum';
     $statement = $db->prepare($query);
-    $statement->bindValue(':itemNum', itemNum);
+    $statement->bindValue(':itemNum', $itemNum);
     $statement->execute();
     $statement->closeCursor();
 }
@@ -53,8 +55,9 @@ function add_item($title, $description, $categoryID)
     global $db;
     $query = 'INSERT INTO todoitems (Title, Description, categoryID) VALUES (:title, :description, :categoryID)';
     $statement = $db->prepare($query);
-    $statement->bindValue(':description', description);
-    $statement->bindValue(':categoryID', categoryID);
+    $statement->bindValue(':title', $title);
+    $statement->bindValue(':description', $description);
+    $statement->bindValue(':categoryID', $categoryID);
     $statement->execute();
     $statement->closeCursor();
 }
