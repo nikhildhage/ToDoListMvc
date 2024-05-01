@@ -31,6 +31,17 @@ switch ($action) {
             exit();
         }
         break;
+    case "add_item":
+        if ($category_id && !empty($description) && !empty($title)) {
+            add_item($title, $description, $category_id);
+            header("Location: .?action=list_items&category_id=" . $category_id);
+            exit();
+        } else {
+            $error_message = "Invalid item data. Check all fields and try again.";
+            include("view/error.php");
+            exit();
+        }
+        break;
     default:
         $categories = get_categories();
         $items = get_items_by_category($category_id);
