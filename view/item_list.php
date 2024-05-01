@@ -24,8 +24,9 @@ include('view/header.php'); // Include the header part of the HTML page
         <!-- Loop through each item and display it -->
         <?php foreach ($items as $item) : ?>
             <div>
-                <p><strong><?= htmlspecialchars($item['categoryName']) ?></strong></p> <!-- Display the category name -->
-                <p><?= htmlspecialchars($item['Description']) ?></p> <!-- Display the item description -->
+                <p><strong>Category: <?= htmlspecialchars($item['categoryName']) ?></strong></p> <!-- Display the category name -->
+                <p><strong>Title: <?= htmlspecialchars($item['Title']) ?></strong></p> <!-- Display the item title -->
+                <p>Description: <?= htmlspecialchars($item['Description']) ?></p> <!-- Display the item description -->
                 <!-- Form to delete the item, with hidden inputs for passing data -->
                 <form action="." method="post">
                     <input type="hidden" name="action" value="delete_item">
@@ -53,7 +54,9 @@ include('view/header.php'); // Include the header part of the HTML page
                     <?= htmlspecialchars($category['categoryName']); ?>
                 </option>
             <?php endforeach; ?>
-        </select>   
+        </select>
+        <!-- Input field for the item title -->
+        <input type="text" name="title" maxlength="50" placeholder="Title" required>
         <!-- Input field for the item description -->
         <input type="text" name="description" maxlength="120" placeholder="Description" required>
         <button type="submit" name="action" value="add_item">Add</button> <!-- Submit button for adding the item -->
