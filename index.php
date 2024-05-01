@@ -42,6 +42,19 @@ switch ($action) {
             exit();
         }
         break;
+    case "delete_category":
+        if ($category_id) {
+            try {
+                delete_category($category_id);
+                header("Location: .?action=list_categories");
+                exit();
+            } catch (PDOException $e) {
+                $error_message = "You cannot delete a category if items exist in the category.";
+                include('view/error.php');
+                exit();
+            }
+        }
+        break;
     default:
         $categories = get_categories();
         $items = get_items_by_category($category_id);
