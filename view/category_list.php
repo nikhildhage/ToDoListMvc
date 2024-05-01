@@ -32,7 +32,25 @@ include("view/header.php");
     <p>No Categories exist yet</p>
 <?php endif; ?>
 
+<!-- Add Category Form -->
+<section>
+    <h2>Add Category</h2>
+    <form action="." method="post" id="add__form" class="add__form">
+        <input type="hidden" name="action" value="add_category">
+        <div class="add__inputs">
+            <label>Name:</label>
+            <!-- Input for the new category name -->
+            <input type="text" name="category_name" maxlength="30" placeholder="Name" autofocus required>
+        </div>
+        <div class="add__addItem">
+            <!-- Button to submit the form and add a new category -->
+            <button class="add-button bold">Add</button>
+        </div>
+    </form>
+</section>
 
+<!-- Link to View/Edit Items -->
+<p><a href=".?action=list_items">View/Edit Items</a></p>
 
 <?php 
 // Include the footer part of the HTML page
