@@ -4,11 +4,11 @@ include('view/header.php'); // Include the header part of the HTML page
 
 <!-- Section to Display Items -->
 <section>
-    <h1>Items</h1>
+    <h1>Todo List Items</h1>
     <!-- Form for Filtering Items by Category -->
     <form action="." method="get" class="mb-3">
         <select name="category_id" class="form-control w-auto d-inline-block">
-            <option value="0">View All</option>
+            <option value="0">View All Categories</option>
             <?php foreach ($categories as $category) : ?>
                 <option value="<?= $category['categoryID'] ?>" <?= $category_id == $category['categoryID'] ? 'selected' : '' ?>>
                     <?= htmlspecialchars($category['categoryName']) ?>
@@ -60,7 +60,7 @@ include('view/header.php'); // Include the header part of the HTML page
     <h2>Add Item</h2>
     <form action="." method="post" class="form-inline">
         <select name="category_id" class="form-control mb-2 mr-sm-2" required>
-            <option value="">Please select</option>
+            <option value="">Please select category</option>
             <?php foreach ($categories as $category) : ?>
                 <option value="<?= $category['categoryID'] ?>">
                     <?= htmlspecialchars($category['categoryName']); ?>
