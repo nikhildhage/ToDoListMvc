@@ -34,7 +34,7 @@ switch ($action) {
     case "add_item":
         if ($category_id) {
             add_item($title, $description, $category_id);
-            header("Location: .?action=list_items&category_id=" . $category_id);
+            header("Location: .?action=list_items");
             exit();
         } else {
             $error_message = "Invalid item data. Check all fields and try again.";
