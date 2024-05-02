@@ -6,66 +6,75 @@ include('view/header.php'); // Include the header part of the HTML page
 <section>
     <h1>Items</h1>
     <!-- Form for Filtering Items by Category -->
-    <form action="." method="get">
-        <select name="category_id">
+    <form action="." method="get" class="mb-3">
+        <select name="category_id" class="form-control w-auto d-inline-block">
             <option value="0">View All</option>
             <?php foreach ($categories as $category) : ?>
-                <!-- Dynamically generate options for categories, mark selected based on current filter -->
                 <option value="<?= $category['categoryID'] ?>" <?= $category_id == $category['categoryID'] ? 'selected' : '' ?>>
                     <?= htmlspecialchars($category['categoryName']) ?>
                 </option>
             <?php endforeach; ?>
         </select>
-        <button type="submit">Go</button> <!-- Submit button for the filter form -->
+        <button type="submit" class="btn btn-primary">Go</button>
     </form>
 
-    <!-- Check if there are items to display -->
-    <?php if (!empty($items)) : ?>
-        <!-- Loop through each item and display it -->
-        <?php foreach ($items as $item) : ?>
-            <div>
-                <p><strong>Category: <?= htmlspecialchars($item['categoryName']) ?></strong></p> <!-- Display the category name -->
-                <p><strong>Title: <?= htmlspecialchars($item['Title']) ?></strong></p> <!-- Display the item title -->
-                <p>Description: <?= htmlspecialchars($item['Description']) ?></p> <!-- Display the item description -->
-                <!-- Form to delete the item, with hidden inputs for passing data -->
-                <form action="." method="post">
-                    <input type="hidden" name="action" value="delete_item">
-                    <input type="hidden" name="item_id" value="<?= $item['ItemNum'] ?>">
-                    <button type="submit">X</button> <!-- Button to delete the item -->
-                </form>
-            </div>
-        <?php endforeach; ?>
-    <?php else : ?>
-        <!-- Message displayed if no items exist -->
-        <p>No items exist<?= $category_id ? ' for this category' : '' ?> yet.</p>
-    <?php endif; ?>
+    <!-- Responsive table -->
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($items)) : ?>
+                    <?php foreach ($items as $item) : ?>
+                    <tr>
+                        <td><?= htmlspecialchars($item['categoryName']) ?></td>
+                        <td><?= htmlspecialchars($item['Title']) ?></td>
+                        <td><?= htmlspecialchars($item['Description']) ?></td>
+                        <td>
+                            <form action="." method="post">
+                                <input type="hidden" name="action" value="delete_item">
+                                <input type="hidden" name="item_id" value="<?= $item['ItemNum'] ?>">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="4">No items exist<?= $category_id ? ' for this category' : '' ?> yet.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </section>
 
 <!-- Section to Add a New Item -->
 <section>
     <h2>Add Item</h2>
-    <!-- Form for Adding a New Item -->
-    <form action="." method="post">
-        <select name="category_id" required>
+    <form action="." method="post" class="form-inline">
+        <select name="category_id" class="form-control mb-2 mr-sm-2" required>
             <option value="">Please select</option>
             <?php foreach ($categories as $category) : ?>
-                <!-- Options for selecting category, populated dynamically -->
                 <option value="<?= $category['categoryID'] ?>">
                     <?= htmlspecialchars($category['categoryName']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
-        <!-- Input field for the item title -->
-        <input type="text" name="title" maxlength="50" placeholder="Title" required>
-        <!-- Input field for the item description -->
-        <input type="text" name="description" maxlength="120" placeholder="Description" required>
-        <button type="submit" name="action" value="add_item">Add</button> <!-- Submit button for adding the item -->
+        <input type="text" name="title" class="form-control mb-2 mr-sm-2" maxlength="50" placeholder="Title" required>
+        <input type="text" name="description" class="form-control mb-2 mr-sm-2" maxlength="120" placeholder="Description" required>
+        <button type="submit" name="action" value="add_item" class="btn btn-primary mb-2">Add</button>
     </form>
 </section>
 
 <!-- Link to View/Edit Categories Page -->
-<p><a href=".?action=list_categories">View/Edit Categories</a></p>
-
+<p><a href=".?action=list_categories" class="btn btn-link">View/Edit Categories</a></p>
 
 <?php 
 include('view/footer.php'); // Include the footer part of the HTML page
