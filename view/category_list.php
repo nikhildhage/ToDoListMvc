@@ -40,9 +40,10 @@ include("view/header.php");
 <!-- Add Category Form -->
 <section>
     <h2>Add Category</h2>
-    <form action="." method="post" class="form-inline">
+    <form action="index.php" method="post" class="form-inline">
+        <input type="hidden" name="action" value="add_category">
         <input type="text" name="category_name" class="form-control mb-2 mr-sm-2" maxlength="30" placeholder="Name" autofocus required>
-        <button class="btn btn-primary mb-2">Add</button>
+        <button type="submit" class="btn btn-primary mb-2">Add</button>
     </form>
 </section>
 
