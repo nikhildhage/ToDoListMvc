@@ -53,6 +53,10 @@ switch ($action) {
                 include('view/error.php');
                 exit();
             }
+        } else {
+            $error_message = "Missing or incorrect category ID.";
+            include('view/error.php');
+            exit();
         }
         break;
     case "delete_item":
